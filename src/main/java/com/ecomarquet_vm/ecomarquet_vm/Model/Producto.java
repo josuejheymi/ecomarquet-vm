@@ -16,7 +16,7 @@ import java.util.Date;
 public class Producto {
     // id
     @Id
-    private String carrito_id;
+    private String producto_id;
 
     // Nombre
     @Column(nullable = false, length = 100)

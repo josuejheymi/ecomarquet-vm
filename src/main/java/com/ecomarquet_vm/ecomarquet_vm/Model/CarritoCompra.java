@@ -16,11 +16,6 @@ public class CarritoCompra {
     @Id
     private String carrito_id;
 
-    // Relacion con Producto
-    @ManyToMany
-    @JoinColumn(name = "producto_id", nullable= false)
-    private Producto producto;
-
     // Relacion con Producto (lista de productos)
     @ManyToMany
     private List<Producto> productos = new ArrayList<>();
