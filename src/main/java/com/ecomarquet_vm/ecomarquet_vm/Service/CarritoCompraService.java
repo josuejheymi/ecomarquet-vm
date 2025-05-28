@@ -17,7 +17,7 @@ public class CarritoCompraService {
     private ProductoRepository productoRepository;
 
     // Agregar un producto al carrito de compra
-    public CarritoCompra agregarProducto(String carritoId, String productoId) {
+    public CarritoCompra agregarProducto( String carritoId, String productoId) {
         CarritoCompra carrito = carritoCompraRepository.findById(carritoId).orElse(null); // Busca el carrito por su ID
         Producto producto = productoRepository.findById(productoId).orElse(null); // Busca el producto por su ID
         carrito.getProductos().add(producto); // Agrega el prducto al carrito
