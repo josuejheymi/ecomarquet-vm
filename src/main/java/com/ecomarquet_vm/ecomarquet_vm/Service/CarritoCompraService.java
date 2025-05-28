@@ -6,6 +6,7 @@ import com.ecomarquet_vm.ecomarquet_vm.Model.Producto;
 import com.ecomarquet_vm.ecomarquet_vm.Repository.CarritoCompraRepository;
 import com.ecomarquet_vm.ecomarquet_vm.Repository.ProductoRepository;
 
+
 @Service
 public class CarritoCompraService {
 
@@ -16,27 +17,28 @@ public class CarritoCompraService {
     private ProductoRepository productoRepository;
 
     // Agregar un producto al carrito de compra
-    public CarritoCompra agregarProducto(String carritoId, Long productoId) {
-        var carrito = carritoCompraRepository.findById(carritoId).orElseThrow(); // Busca el carrito por su ID
-        var producto = productoRepository.findById(productoId).orElseThrow(); // Busca el producto por su ID
+    public CarritoCompra agregarProducto(String carritoId, String productoId) {
+        CarritoCompra carrito = carritoCompraRepository.findById(carritoId).orElseThrow(); // Busca el carrito por su ID
+        Producto producto = productoRepository.findById(productoId).orElseThrow(); // Busca el producto por su ID
         carrito.getProductos().add(producto); // Agrega el prducto al carrito
         return carritoCompraRepository.save(carrito); // Guarda el carrito actualizado
     }
 
     // Eliminar un producto del carrito de compra
-    public CarritoCompra eliminarProducto(String carritoId, Long productoId) {
-        var carrito = carritoCompraRepository.findById(carritoId).orElseThrow();
-        var producto = productoRepository.findById(productoId).orElseThrow();
+    public CarritoCompra eliminarProducto(String carritoId, String productoId) {
+        CarritoCompra carrito = carritoCompraRepository.findById(carritoId).orElseThrow();
+        Producto producto = productoRepository.findById(productoId).orElseThrow();
         carrito.getProductos().remove(producto);
         return carritoCompraRepository.save(carrito);
     }
 
     // Calcular el total del carrito de compra
-    public double calcularTotal() {
-    return productos.stream()
-            .mapToDouble(Producto::getPrecio)
-            .sum();
-}
+    public double calcularTotal(String carritoId) {
+        CarritoCompra carrito = carritoCompraRepository.findById(carritoId).orElseThrow();
+        return carrito.getProductos().stream()
+                .mapToDouble(Producto::getPrecio)
+                .sum();
+    }
 }
 
 // @Autowired inyecta las dependencias de los repositorios

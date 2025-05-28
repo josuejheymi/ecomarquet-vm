@@ -13,17 +13,18 @@ import java.util.ArrayList;
 
 public class CarritoCompra {
 
-@Id
-private String carrito_id;
+    @Id
+    private String carrito_id;
 
-// Relacion con Producto
-@ManyToMany
-@JoinColumn(name = "producto_id", nullable= false)
-private Producto producto;
-// Relacion con Producto (lista de productos)
-@ManyToMany
-private List<Producto> productos = new ArrayList<>();
+    // Relacion con Producto
+    @ManyToMany
+    @JoinColumn(name = "producto_id", nullable= false)
+    private Producto producto;
 
-@Column(nullable = false, precision = 10) private Double total;
+    // Relacion con Producto (lista de productos)
+    @ManyToMany
+    private List<Producto> productos = new ArrayList<>();
+
+    @Column(nullable = false, precision = 10) private Double total;
 
 }
