@@ -18,23 +18,23 @@ public class CarritoCompraService {
 
     // Agregar un producto al carrito de compra
     public CarritoCompra agregarProducto(String carritoId, String productoId) {
-        CarritoCompra carrito = carritoCompraRepository.findById(carritoId).orElseThrow(); // Busca el carrito por su ID
-        Producto producto = productoRepository.findById(productoId).orElseThrow(); // Busca el producto por su ID
+        CarritoCompra carrito = carritoCompraRepository.findById(carritoId).orElse(null); // Busca el carrito por su ID
+        Producto producto = productoRepository.findById(productoId).orElse(null); // Busca el producto por su ID
         carrito.getProductos().add(producto); // Agrega el prducto al carrito
         return carritoCompraRepository.save(carrito); // Guarda el carrito actualizado
     }
 
     // Eliminar un producto del carrito de compra
     public CarritoCompra eliminarProducto(String carritoId, String productoId) {
-        CarritoCompra carrito = carritoCompraRepository.findById(carritoId).orElseThrow();
-        Producto producto = productoRepository.findById(productoId).orElseThrow();
+        CarritoCompra carrito = carritoCompraRepository.findById(carritoId).orElse(null);
+        Producto producto = productoRepository.findById(productoId).orElse(null);
         carrito.getProductos().remove(producto);
         return carritoCompraRepository.save(carrito);
     }
 
     // Calcular el total del carrito de compra
     public double calcularTotal(String carritoId) {
-        CarritoCompra carrito = carritoCompraRepository.findById(carritoId).orElseThrow();
+        CarritoCompra carrito = carritoCompraRepository.findById(carritoId).orElse(null);
         return carrito.getProductos().stream()
                 .mapToDouble(Producto::getPrecio)
                 .sum();

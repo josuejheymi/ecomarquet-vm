@@ -1,9 +1,15 @@
 package com.ecomarquet_vm.ecomarquet_vm.Model;
-import com.ecomarquet_vm.ecomarquet_vm.Model.Producto;
-import lombok.*;
-import jakarta.persistence.*;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "carritoCompra")
@@ -13,13 +19,26 @@ import java.util.ArrayList;
 
 public class CarritoCompra {
 
+    // id
     @Id
     private String carrito_id;
 
-    // Relacion con Producto (lista de productos)
+    // Relacion con Producto
     @ManyToMany
     private List<Producto> productos = new ArrayList<>();
 
-    @Column(nullable = false, precision = 10) private Double total;
+    // Total
+    @Column(nullable = false, precision = 10) 
+    private Double total;
+
+    // Getter
+    public List<Producto> getProductos() {
+        return productos;
+    }
+
+    // Setter
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
+    }
 
 }
