@@ -21,7 +21,7 @@ return CuponRepository.save(Cupon);
 public void delete(String codigo) {
 CuponRepository.deleteById(codigo);
 }
-public Cupon aplicarDescuento(Long id){
-return CuponRepository.aplicarDescuento(id);
+public Cupon aplicarDescuento(String codigo){
+return Cupon.aplicarDescuento(codigo);
 }
 }

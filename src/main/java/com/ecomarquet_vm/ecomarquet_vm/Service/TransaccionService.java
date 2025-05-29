@@ -14,16 +14,16 @@ private FacturaRepository FacturaRepository;
 public List<Transaccion> findAll() {
 return TransaccionRepository.findAll();
 }
-public Transaccion findById(Long id) {
+public Transaccion findById(String transaccion_id) {
 return TransaccionRepository.findById(id).orElse(null);
 }
 public Transaccion save(Transaccion Transaccion) {
 return TransaccionRepository.save(Transaccion);
 }
-public void delete(Long id) {
-TransaccionRepository.deleteById(id);
+public void delete(String transaccion_id) {
+TransaccionRepository.deleteById(transaccion_id);
 
-public Factura crearFacturaDesdeTransaccion(Long id) {
+public Factura crearFacturaDesdeTransaccion(String factura_id) {
         FacturaProjection projection = TransaccionRepository.generarFactura(id);
 
         Factura factura = new Factura();

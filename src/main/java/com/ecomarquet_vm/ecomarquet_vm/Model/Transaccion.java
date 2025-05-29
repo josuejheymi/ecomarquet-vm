@@ -14,7 +14,7 @@ public class Transaccion {
 
     @Id
     @Column(nullable = false, unique = true)
-    private Long id;
+    private String transaccion_id;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)

@@ -12,8 +12,8 @@ import java.util.Date;
 public class Cupon {
 
     @Id
-    @Column(strategy = GenerationType.IDENTITY)
-    private String id;
+    @Column(nullable = false, precision = 5, scale = 2)
+    private String codigo;
 
     @Column(nullable = false, precision = 5, scale = 2)
     private BigDecimal descuento;
