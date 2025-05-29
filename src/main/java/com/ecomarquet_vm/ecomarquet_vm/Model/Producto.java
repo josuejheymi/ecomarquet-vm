@@ -22,26 +22,27 @@ import lombok.NoArgsConstructor;
 public class Producto {
     // id
     @Id
+    @Column(name = "producto_id", length = 20)
     private String producto_id;
 
     // Nombre
-    @Column(nullable = false, length = 100)
+    @Column(name = "nombre", nullable = false, length = 100)
     private String nombre;
 
     // Descripcion
-    @Column(nullable = false, length = 100)
+    @Column(name = "descripcion", nullable = false, length = 100)
     private String descripcion;
 
     // Precio
-    @Column(nullable = false, precision = 10) 
+    @Column(name = "precio", nullable = false, precision = 10) 
     private Double precio;
 
     // Stock
-    @Column(nullable = false, precision = 10) 
+    @Column(name = "stock", nullable = false, precision = 10) 
     private Integer stock;
 
     // Categoria
-    @Column(nullable = false, length = 100)
+    @Column(name = "categoria", nullable = false, length = 100)
     private String categoria;
 
     // Fecha creacion

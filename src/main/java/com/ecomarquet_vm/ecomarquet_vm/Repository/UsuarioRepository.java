@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.ecomarquet_vm.ecomarquet_vm.Model.Usuario;
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
-    // Custom query methods can be defined here if needed
+    
     
 }
 
