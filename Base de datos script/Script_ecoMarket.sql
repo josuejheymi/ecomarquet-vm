@@ -7,10 +7,10 @@ INSERT INTO usuario (id, nombre, email, contrasena, rol, fechaCreacion, activo) 
 
 -- 2. Reporte
 INSERT INTO reporte (id, tipo, fechaGeneracion) VALUES
-(1, '' ,'12-02-2023'),
-(2, '' ,'03-04-2025'),
-(3, '' ,'01-04-2024'),
-(4, '' ,'20-05-2025');
+(1, 'tipo 1' ,'12-02-2023'),
+(2, 'tipo 2' ,'03-04-2025'),
+(3, 'tipo 1' ,'01-04-2024'),
+(4, 'tipo 1' ,'20-05-2025');
 
 -- 3. Carrito Compra
 INSERT INTO carritoCompra (carrito_id, producto_id, total) VALUES
