@@ -15,7 +15,5 @@ public class ProductoService {
         Producto producto = productoRepository.findById(productoId).orElse(null);
         producto.setStock(nuevoStock);
         return productoRepository.save(producto);
-
     }
-
 }
