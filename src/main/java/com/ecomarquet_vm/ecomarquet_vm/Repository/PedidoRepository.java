@@ -1,5 +1,8 @@
 package com.ecomarquet_vm.ecomarquet_vm.Repository;
 
-public class PedidoRepository {
+import com.ecomarquet_vm.ecomarquet_vm.Model.Pedido;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface PedidoRepository extends JpaRepository<Pedido, Long> {
 
 }
