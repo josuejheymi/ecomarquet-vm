@@ -1,5 +1,28 @@
 package com.ecomarquet_vm.ecomarquet_vm.Service;
 
-public class UsuarioService {
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ecomarquet_vm.ecomarquet_vm.Model.Usuario;
+import com.ecomarquet_vm.ecomarquet_vm.Repository.UsuarioRepository;
+
+@Service
+public class UsuarioService {
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
+    public List<Usuario>findAll(){
+        return usuarioRepository.findAll();
+    }
+    public Usuario findById(Long id) {
+        return usuarioRepository.findById(id).orElse(null);
+    }
+    public Usuario save(Usuario usuario) {
+        return usuarioRepository.save(usuario);
+    }
+    public void delete(Long id) {
+        usuarioRepository.deleteById(id);
+    }
 }
