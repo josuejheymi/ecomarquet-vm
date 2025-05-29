@@ -13,7 +13,7 @@ public class Cupon {
 
     @Id
     @Column(strategy = GenerationType.IDENTITY)
-    private String codigo;
+    private String id;
 
     @Column(nullable = false, precision = 5, scale = 2)
     private BigDecimal descuento;
