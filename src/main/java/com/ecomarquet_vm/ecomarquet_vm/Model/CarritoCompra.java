@@ -21,6 +21,7 @@ public class CarritoCompra {
 
     // id
     @Id
+    @Column(name = "carrito_id", length = 20)
     private String carrito_id;
 
     // Relacion con Producto
