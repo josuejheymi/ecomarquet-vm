@@ -15,7 +15,7 @@ public List<Transaccion> getAll() {
 return TransaccionService.findAll();
 }
 @GetMapping("/{id}")
-public Transaccion getById(@PathVariable Long id) {
+public Transaccion getById(@PathVariable String id) {
 return TransaccionService.findById(id);
 }
 @PostMapping
@@ -23,15 +23,13 @@ public Transaccion create(@RequestBody Transaccion Transaccion) {
 return TransaccionService.save(Transaccion);
 }
 @PutMapping("/{id}")
-public Transaccion update(@PathVariable Long id, @RequestBody Transaccion Transaccion) {
-Transaccion.setId(id);
+public Transaccion update(@PathVariable String id, @RequestBody Transaccion Transaccion) {
+Transaccion.setTransaccion_id(id);
 return TransaccionService.save(Transaccion);
 }
 @DeleteMapping("/{id}")
-public void delete(@PathVariable Long id) {
+public void delete(@PathVariable String id) {
 TransaccionService.delete(id);
-@PostMapping("/generar/{id}")
-public Factura generarFactura(@PathVariable Long id) {
-return FacturaService.crearFacturaDesdeTransaccion(id);
 }
+
 }

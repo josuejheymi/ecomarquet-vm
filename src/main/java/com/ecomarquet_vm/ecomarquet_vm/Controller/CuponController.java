@@ -19,19 +19,19 @@ public class CuponController {
     
     @GetMapping("/{codigo}")
     public Cupon getBycodigo(@PathVariable String codigo) {
-        return CuponService.findBycodigo(codigo);
+        return CuponService.findById(codigo);
     }
     
     @PostMapping
     public Cupon create(@RequestBody Cupon cupon) {
-        return CuponService.save(Cupon);
+        return CuponService.save(cupon);
     }
     
-    @PutMapping("/{codigo}")
-    public Cupon update(@PathVariable String codigo, @RequestBody Cupon cupon) {
-        Cupon.setcodigo(codigo);
-        return CuponService.save(Cupon);
-    }
+    // @PutMapping("/{codigo}")
+    // public Cupon update(@PathVariable String codigo, @RequestBody Cupon cupon) {
+    //     Cupon.setCodigo(codigo);
+    //     return CuponService.save(cupon);
+    // }
     
     @DeleteMapping("/{codigo}")
     public void delete(@PathVariable String codigo) {
@@ -39,7 +39,7 @@ public class CuponController {
     }
     
     @GetMapping("/reporte/descuentoaplicado/{id}")
-    public Cupon aplicarDescuento(@PathVariable Long id) {
+    public Cupon aplicarDescuento(@PathVariable String id) {
         return CuponService.aplicarDescuento(id);
     }
 }

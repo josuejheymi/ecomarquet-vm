@@ -1,13 +1,17 @@
 package com.ecomarquet_vm.ecomarquet_vm.Model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "cupones")
 public class Cupon {
 
@@ -25,4 +29,8 @@ public class Cupon {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_transaccion", nullable = false)
     private Transaccion transaccion;
+
+    public void setCodigo(String codigo){
+        this.codigo = codigo;
+    }
 }

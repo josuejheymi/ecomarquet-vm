@@ -14,7 +14,7 @@ public class Transaccion {
 
     @Id
     @Column(nullable = false, unique = true)
-    private Long id;
+    private String transaccion_id;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
@@ -50,5 +50,9 @@ public class Transaccion {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_reporte", referencedColumnName = "id")
     private Reporte reporte;
+
+    public void setTransaccion_id( String transaccion_id){
+        this.transaccion_id = transaccion_id;
+    }
 
 }

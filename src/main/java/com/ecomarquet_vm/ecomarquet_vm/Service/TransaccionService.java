@@ -11,14 +11,11 @@ public class TransaccionService {
     @Autowired
     private TransaccionRepository TransaccionRepository;
     
-    @Autowired
-    private FacturaRepository FacturaRepository;
-    
     public List<Transaccion> findAll() {
         return TransaccionRepository.findAll();
     }
     
-    public Transaccion findById(Long id) {
+    public Transaccion findById(String id) {
         return TransaccionRepository.findById(id).orElse(null);
     }
     
@@ -26,21 +23,8 @@ public class TransaccionService {
         return TransaccionRepository.save(Transaccion);
     }
     
-    public void delete(Long id) {
+    public void delete(String id) {
         TransaccionRepository.deleteById(id);
-    }
-
-    public Factura crearFacturaDesdeTransaccion(Long id) {
-
-        FacturaProjection projection = TransaccionRepository.generarFactura(id);
-
-        Factura factura = new Factura();
-        factura.setId(UUID.randomUUID().toString());
-        factura.setFecha(projection.getFecha());
-        factura.setDetalles(projection.getDetalles());
-        factura.setTotal(projection.getTotal());
-
-        return facturaRepository.save(factura);
     }
 }
 
