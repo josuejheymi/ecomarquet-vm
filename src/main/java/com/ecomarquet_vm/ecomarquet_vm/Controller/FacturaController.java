@@ -3,40 +3,46 @@ package com.ecomarquet_vm.ecomarquet_vm.Controller;
 import com.ecomarquet_vm.ecomarquet_vm.Model.Factura;
 import com.ecomarquet_vm.ecomarquet_vm.Service.FacturaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/facturas")
-public class FacturaController{
+public class FacturaController {
+
     @Autowired
     private FacturaService facturaService;
 
     @GetMapping
-    public List<Factura> getAll(){
-        return facturaService.getAll();
+    public List<Factura> getAllFacturas() {
+        return facturaService.getAllFacturas();
     }
-    
 
     @GetMapping("/{id}")
-    public Factura getById(@PathVariable Long id) {
-        return facturaService.findById(id);
+    public ResponseEntity<Factura> getFacturaById(@PathVariable String id) {
+        Optional<Factura> factura = facturaService.getFacturaById(id);
+        return factura.map(ResponseEntity::ok)
+                      .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public Factura create(@RequestBody Factura factura) {
-        return facturaService.save(factura);
+    public ResponseEntity<Factura> createFactura(@RequestBody Factura factura) {
+        Factura nuevaFactura = facturaService.saveFactura(factura);
+        return ResponseEntity.ok(nuevaFactura);
     }
 
     @PutMapping("/{id}")
-    public Factura update(@PathVariable Long id, @RequestBody Factura factura) {
-        factura.setId(id);
-        return facturaService.save(factura);
+    public ResponseEntity<Factura> updateFactura(@PathVariable String id, @RequestBody Factura facturaDetails) {
+        Factura facturaActualizada = facturaService.updateFactura(id, facturaDetails);
+        return ResponseEntity.ok(facturaActualizada);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteFactura(@PathVariable Long id) {
-        facturaService.delete(id);
+    public ResponseEntity<Void> deleteFactura(@PathVariable String id) {
+        facturaService.deleteFactura(id);
+        return ResponseEntity.noContent().build();
     }
 }

@@ -14,9 +14,7 @@ import lombok.NoArgsConstructor;
 
 public class Pedido {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_pedido")
-    private Long Id;
+    private String id_Pedido;
 
     @Column (name = "fechaPedido")
     private Date fechaPedido;

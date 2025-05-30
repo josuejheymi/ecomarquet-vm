@@ -15,9 +15,7 @@ import lombok.NoArgsConstructor;
 
 public class Factura {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_factura")
-    private Long Id;
+    private String id_Factura;
 
     @Column(nullable = false, name = "fechaFactura")
     private Date fecha;
