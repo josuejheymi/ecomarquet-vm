@@ -16,13 +16,13 @@ public class ReporteService {
     public List<Reporte> findAll() {
         return reporteRepository.findAll();
     }
-    public Reporte findById(Long id) {
+    public Reporte findById(String id) {
         return reporteRepository.findById(id).orElse(null);
     }
     public  Reporte save(Reporte reporte) {
         return reporteRepository.save(reporte);
     }
-    public void delete(Long id) {
+    public void delete(String id) {
         reporteRepository.deleteById(id);
     }
 }

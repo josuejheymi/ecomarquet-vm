@@ -16,13 +16,13 @@ public class UsuarioService {
     public List<Usuario>findAll(){
         return usuarioRepository.findAll();
     }
-    public Usuario findById(Long id) {
+    public Usuario findById(String id) {
         return usuarioRepository.findById(id).orElse(null);
     }
     public Usuario save(Usuario usuario) {
         return usuarioRepository.save(usuario);
     }
-    public void delete(Long id) {
+    public void delete(String id) {
         usuarioRepository.deleteById(id);
     }
 }
