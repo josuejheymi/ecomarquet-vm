@@ -24,6 +24,9 @@ public class CarritoCompra {
     @Column(name = "carrito_id", length = 20)
     private String carrito_id;
 
+    @Column(name = "producto_id", nullable = false, length = 20)
+    private String producto_id;
+
     // Relacion con Producto
     @ManyToMany
     private List<Producto> productos = new ArrayList<>();

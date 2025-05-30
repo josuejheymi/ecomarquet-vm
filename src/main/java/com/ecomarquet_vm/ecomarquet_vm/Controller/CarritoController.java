@@ -36,6 +36,4 @@ public class CarritoController {
         return carritoCompraService.calcularTotal(carritoId);
 
     }
-
 }
-

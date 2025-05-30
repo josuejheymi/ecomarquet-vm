@@ -46,7 +46,7 @@ public class Producto {
     private String categoria;
 
     // Fecha creacion
-    @Column(name = "Fecha_Creacion", nullable = false)
+    @Column(name = "Fecha_Creacion", nullable = false, length = 100)
     private Date fechaCreacion;
 
     // Relacion con CarritoCompra
@@ -55,7 +55,22 @@ public class Producto {
 
     // Getter
     public Double getPrecio() {
-    return precio;
+        return precio;
     }
+
+    public String getProducto_id(){
+        return producto_id;
+    }
+
+    public Integer getStock() {
+        return stock;
+    }
+
+    // Setter
+    public void setStock(Integer stock) {
+        this.stock = stock;
+    }
+
+
 
 }
