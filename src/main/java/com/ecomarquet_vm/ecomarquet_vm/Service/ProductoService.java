@@ -2,8 +2,9 @@ package com.ecomarquet_vm.ecomarquet_vm.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.ecomarquet_vm.ecomarquet_vm.Repository.ProductoRepository;
+
 import com.ecomarquet_vm.ecomarquet_vm.Model.Producto;
+import com.ecomarquet_vm.ecomarquet_vm.Repository.ProductoRepository;
 
 @Service
 public class ProductoService {
@@ -17,3 +18,4 @@ public class ProductoService {
         return productoRepository.save(producto);
     }
 }
+// 
