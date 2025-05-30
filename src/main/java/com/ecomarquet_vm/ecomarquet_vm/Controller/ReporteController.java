@@ -25,8 +25,8 @@ public class ReporteController {
     public List<Reporte> getAll() {
         return reporteService.findAll();
     }
-    @GetMapping("/{id}")
-    public Reporte getById(@PathVariable Long id) {
+    @GetMapping("/{id}")    //Busca el reporte mediante su ID_reporte
+    public Reporte getById(@PathVariable String id) {
         return reporteService.findById(id);
     }
     @PostMapping
@@ -34,12 +34,12 @@ public class ReporteController {
         return reporteService.save(reporte);
     }
     @PutMapping("/{id}")
-    public Reporte update(@PathVariable Long id, @RequestBody Reporte reporte) {
-        reporte.setId(id); // Ensure the ID is set for the update
+    public Reporte update(@PathVariable String id, @RequestBody Reporte reporte) {
+        reporte.setId_reporte(id); // Ensure the ID is set for the update
         return reporteService.save(reporte);
     }
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    @DeleteMapping("/{id}") //elimina reporte buscando su ID
+    public void delete(@PathVariable String id) {
         reporteService.delete(id);
     }
 }

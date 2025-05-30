@@ -11,8 +11,7 @@ import lombok.*;
 public class Reporte {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id_reporte;
     
     @Column(nullable = false, length = 100)
     private String tipo;

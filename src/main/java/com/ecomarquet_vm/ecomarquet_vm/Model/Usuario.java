@@ -1,6 +1,7 @@
 package com.ecomarquet_vm.ecomarquet_vm.Model;
 import java.sql.Date;
 //import java.util.List;
+import java.util.List;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -11,9 +12,8 @@ import lombok.*;
 @AllArgsConstructor
 public class Usuario {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_usuario")
-    private Long id;
+    private String id_usuario;
 
     @Column(nullable = false,unique = true,length = 20)
     private String nombre;
@@ -34,11 +34,11 @@ public class Usuario {
     private String activo;
 
     //Relacion con carrito compra
-    //@ManyToOne
-    //@JoinColumn(name= "carrito_id", nullable = false)
-    //private CarritoCompra carritoCompra;
+    @ManyToOne
+    @JoinColumn(name= "carrito_id", nullable = false)
+    private CarritoCompra carritoCompra;
     //Relacion con pedido
-    //@OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL)
-    //private List<Pedido> pedidos;
+    @OneToMany(mappedBy = "usuario",cascade = CascadeType.ALL)
+    private List<Pedido> pedidos;
 
 }
