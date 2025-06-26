@@ -1,48 +1,34 @@
 package com.ecomarquet_vm.ecomarquet_vm.Model;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 @Entity
-@Table(name = "carritoCompra")
+@Table(name = "carrito_compra")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class CarritoCompra {
-
-    // id
     @Id
-    @Column(name = "carrito_id", length = 20)
-    private String carrito_id;
-
-    @Column(name = "producto_id", nullable = false, length = 20)
-    private String producto_id;
-
-    // Relacion con Producto
+    @Column(name = "carrito_id")
+    private String id;
+    
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal total = BigDecimal.ZERO;
+    
+    @OneToOne
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuario;
+    
     @ManyToMany
+    @JoinTable(
+        name = "carrito_producto",
+        joinColumns = @JoinColumn(name = "carrito_id"),
+        inverseJoinColumns = @JoinColumn(name = "producto_id")
+    )
     private List<Producto> productos = new ArrayList<>();
-
-    // Total
-    @Column(nullable = false, precision = 10) 
-    private Double total;
-
-    // Getter
-    public List<Producto> getProductos() {
-        return productos;
-    }
-
-    // Setter
-    public void setProductos(List<Producto> productos) {
-        this.productos = productos;
-    }
-
 }

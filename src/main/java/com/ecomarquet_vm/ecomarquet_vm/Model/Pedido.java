@@ -1,37 +1,34 @@
 package com.ecomarquet_vm.ecomarquet_vm.Model;
 
-import java.util.*;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.util.Date;
 
 @Entity
 @Table(name = "pedido")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class Pedido {
     @Id
-    private String id_Pedido;
-
-    @Column (name = "fechaPedido")
-    private Date fechaPedido;
-
-    @Column (nullable = false, length = 100)
-    private String estado;
-
-    @Column (nullable = false, length = 100)
-    private String direccionEnvio;
-
-    //Relacion con Usuario
-    @ManyToOne
-    @JoinColumn(name = "id_usuario", nullable = false)
-    private Usuario usuario;
-    //Relacion con Transaccion
-    @ManyToOne
-    @JoinColumn(name = "id_transaccion", nullable = false)
-    private Transaccion transaccion;
+    @Column(name = "pedido_id")
+    private String id;
     
+    @Column(nullable = false, name = "fecha_pedido")
+    private Date fechaPedido;
+    
+    @Column(nullable = false, length = 100)
+    private String estado;
+    
+    @Column(nullable = false, name = "direccion_envio")
+    private String direccionEnvio;
+    
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuario;
+    
+    @OneToOne
+    @JoinColumn(name = "transaccion_id", nullable = false)
+    private Transaccion transaccion;
 }

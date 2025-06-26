@@ -10,19 +10,27 @@ import org.springframework.data.repository.query.Param;
 
 public interface CuponRepository extends JpaRepository<Cupon, String> {
 
-  /**
-   * Busca un cupón por su código.
-   *
-   * @param codigo el código del cupón
-   * @return el cupón encontrado o null si no existe
-   */
-  Cupon findByCodigo(String codigo);
+ /**
+     * Busca un cupón por su código.
+     *
+     * @param codigo el código del cupón
+     * @return el cupón encontrado o null si no existe
+     */
+    Cupon findByCodigo(String codigo);
 
-@Query("""
-  SELECT t.total - (t.total * COALESCE(SUM(c.descuento), 0) / 100) 
-  FROM Cupon c 
-  JOIN c.transaccion t 
-  WHERE t.id = :transaccionId""")
-BigDecimal aplicarDescuento(@Param("id") String id);
+    /**
+     * Aplica el descuento total sobre una transacción.
+     * Retorna el monto final con descuento aplicado.
+     *
+     * @param transaccionId ID de la transacción
+     * @return total - descuento
+     */
+    @Query("""
+      SELECT t.total - (t.total * COALESCE(SUM(c.descuento), 0) / 100) 
+      FROM Cupon c 
+      JOIN c.transaccion t 
+      WHERE t.id = :transaccionId
+    """)
+    BigDecimal aplicarDescuento(@Param("transaccionId") String transaccionId);
 
 }

@@ -6,6 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.ecomarquet_vm.ecomarquet_vm.Model.Usuario;
 public interface UsuarioRepository extends JpaRepository<Usuario, String> {
     
-    
 }
 

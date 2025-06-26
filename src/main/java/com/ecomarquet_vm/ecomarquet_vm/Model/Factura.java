@@ -1,34 +1,31 @@
 package com.ecomarquet_vm.ecomarquet_vm.Model;
 
-import java.sql.Date;
-
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.math.BigDecimal;
+import java.util.Date;
 
 @Entity
 @Table(name = "factura")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class Factura {
     @Id
-    private String id_Factura;
-
-    @Column(nullable = false, name = "fechaFactura")
+    @Column(name = "factura_id")
+    private String id;
+    
+    @Column(nullable = false)
     private Date fecha;
-
+    
     @Column(nullable = false, length = 100)
-    private String detalles; 
-
-    @Column(nullable = false, length = 100)
-    private double total;
-
-    //Relacion con Transaccion
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_transaccion", referencedColumnName = "id")
+    private String detalles;
+    
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal total;
+    
+    @OneToOne
+    @JoinColumn(name = "transaccion_id", nullable = false, unique = true)
     private Transaccion transaccion;
 }
-

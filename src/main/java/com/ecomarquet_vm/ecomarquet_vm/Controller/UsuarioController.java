@@ -38,7 +38,7 @@ public class UsuarioController {
     }
     @PutMapping("/{id}")    //Actualiza datos del usuario con ID
     public Usuario update(@PathVariable String id, @RequestBody Usuario usuario) {
-        usuario.setId_usuario(id); // Ensure the ID is set for the update
+        usuario.setId(id); // Ensure the ID is set for the update
         return usuarioService.save(usuario);
     }
     @DeleteMapping("/{id}") // Elimina usuario por el ID

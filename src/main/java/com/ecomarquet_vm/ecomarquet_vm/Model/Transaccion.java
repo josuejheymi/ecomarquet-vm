@@ -1,58 +1,43 @@
 package com.ecomarquet_vm.ecomarquet_vm.Model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-@Data
 @Entity
-@Table(name = "transacciones")
+@Table(name = "transaccion")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Transaccion {
-
     @Id
-    @Column(nullable = false, unique = true)
-    private String transaccion_id;
-
-    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "transaccion_id")
+    private String id;
+    
     @Column(nullable = false)
     private Date fecha;
-
+    
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal total;
-
-    @Column(nullable = false)
+    
+    @Column(nullable = false, length = 50)
     private String estado;
-
-    @Column(name = "metodo_pago", nullable = false)
+    
+    @Column(nullable = false, name = "metodo_pago")
     private String metodoPago;
-
-    // Relaciones
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_pedido", referencedColumnName = "id")
+    
+    @OneToOne(mappedBy = "transaccion")
     private Pedido pedido;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_factura", referencedColumnName = "id")
+    
+    @OneToOne(mappedBy = "transaccion")
     private Factura factura;
-
-    @OneToMany
-    @JoinColumn(name = "id_transaccion")
+    
+    @OneToMany(mappedBy = "transaccion")
     private List<Cupon> cupones;
-
-    @OneToMany
-    @JoinColumn(name = "id_transaccion")
-    private List<Producto> productos;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_reporte", referencedColumnName = "id")
+    
+    @OneToOne(mappedBy = "transaccion")
     private Reporte reporte;
-
-    public void setTransaccion_id( String transaccion_id){
-        this.transaccion_id = transaccion_id;
-    }
-
 }

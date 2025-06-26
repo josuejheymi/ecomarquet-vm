@@ -1,5 +1,7 @@
 package com.ecomarquet_vm.ecomarquet_vm.Controller;
 
+import java.math.BigDecimal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,10 +32,9 @@ public class CarritoController {
         return carritoCompraService.eliminarProducto(carritoId, productoId);
     }
 
-    // Calcular total del carrito
+    // Calcular total del carrito - se cambio a bigdecimal para manejar mejor los decimales y evitar errores de redondeo
     @GetMapping("/{carritoId}/total")
-    public double calcularTotal(@PathVariable String carritoId){
+    public BigDecimal calcularTotal(@PathVariable String carritoId){
         return carritoCompraService.calcularTotal(carritoId);
-
     }
 }

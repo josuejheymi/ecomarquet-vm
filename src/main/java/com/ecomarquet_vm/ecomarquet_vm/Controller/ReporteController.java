@@ -35,7 +35,7 @@ public class ReporteController {
     }
     @PutMapping("/{id}")
     public Reporte update(@PathVariable String id, @RequestBody Reporte reporte) {
-        reporte.setId_reporte(id); // Ensure the ID is set for the update
+        reporte.setId(id); // Ensure the ID is set for the update
         return reporteService.save(reporte);
     }
     @DeleteMapping("/{id}") //elimina reporte buscando su ID

@@ -31,12 +31,14 @@ public class FacturaService {
             factura.setFecha(facturaDetails.getFecha());
             factura.setDetalles(facturaDetails.getDetalles());
             factura.setTotal(facturaDetails.getTotal());
+            factura.setTransaccion(facturaDetails.getTransaccion()); // <-- ¡NO OLVIDAR ESTO!
             return facturaRepository.save(factura);
         }).orElseGet(() -> {
-            facturaDetails.setId_Factura(id);
+            facturaDetails.setId(id); // <-- O usa setIdFactura si tu método es ese
             return facturaRepository.save(facturaDetails);
         });
     }
+
 
     public void deleteFactura(String id) {
         facturaRepository.deleteById(id);
