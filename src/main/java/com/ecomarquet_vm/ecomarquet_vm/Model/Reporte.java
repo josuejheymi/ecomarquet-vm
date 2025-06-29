@@ -34,4 +34,36 @@ public class Reporte {
     @OneToOne
     @JoinColumn(name = "transaccion_id")
     private Transaccion transaccion;
+
+    // Getters y Setters
+    public String getId() {
+        return id;
+    }
+    public void setId(String id) {
+        this.id = id;
+    }
+    public String getTipo() {
+        return tipo;
+    }
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+    public Date getFechaGeneracion() {
+        return fechaGeneracion;
+    }
+    public void setFechaGeneracion(Date fechaGeneracion) {
+        this.fechaGeneracion = fechaGeneracion;
+    }
+    public String getDatos() {
+        return datos;
+    }
+    public void setDatos(String datos) {
+        this.datos = datos;
+    }
+    public Transaccion getTransaccion() {
+        return transaccion;
+    }
+    public void setTransaccion(Transaccion transaccion) {
+        this.transaccion = transaccion;
+    }
 }

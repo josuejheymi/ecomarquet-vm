@@ -47,4 +47,61 @@ public class Transaccion {
     
     @OneToOne(mappedBy = "transaccion")
     private Reporte reporte;
+
+    // Getters y Setters
+    public String getId() {
+        return id;
+    }
+    public void setId(String id) {
+        this.id = id;
+    }
+    public Date getFecha() {
+        return fecha;
+    }
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
+    }
+    public BigDecimal getTotal() {
+        return total;
+    }
+    public void setTotal(BigDecimal total) {
+        this.total = total;
+    }
+    public String getEstado() {
+        return estado;
+    }
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+    public String getMetodoPago() {
+        return metodoPago;
+    }
+    public void setMetodoPago(String metodoPago) {
+        this.metodoPago = metodoPago;
+    }
+    public Pedido getPedido() {
+        return pedido;
+    }
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
+    }
+    public Factura getFactura() {
+        return factura;
+    }
+    public void setFactura(Factura factura) {
+        this.factura = factura;
+    }
+    public List<Cupon> getCupones() {
+        return cupones;
+    }
+    public void setCupones(List<Cupon> cupones) {
+        this.cupones = cupones;
+    }
+    public Reporte getReporte() {
+        return reporte;
+    }
+    public void setReporte(Reporte reporte) {
+        this.reporte = reporte;
+    }
+    
 }
