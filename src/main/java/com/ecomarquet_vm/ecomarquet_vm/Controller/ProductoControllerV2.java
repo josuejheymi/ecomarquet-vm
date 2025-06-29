@@ -42,7 +42,7 @@ public class ProductoControllerV2 {
     private ProductoModelAssembler productoModelAssembler;
     
     // Actualizar stock de un producto
-    @PutMapping(produces = MediaTypes.HAL_JSON_VALUE)
+    @PutMapping(value="/actualizar",produces = MediaTypes.HAL_JSON_VALUE)
     public CollectionModel<EntityModel<Producto>> actualizarStock(@PathVariable String id, @RequestParam Integer stock) {
         productoService.actualizarStock(id, stock);
         List<EntityModel<Producto>> productos = StreamSupport.stream(productoService.getAll().spliterator(), false)
@@ -53,7 +53,7 @@ public class ProductoControllerV2 {
     }
 
     // Obtener todos los productos
-    @GetMapping(produces = MediaTypes.HAL_JSON_VALUE)
+    @GetMapping(value="/listaproductos",produces = MediaTypes.HAL_JSON_VALUE)
     public CollectionModel<EntityModel<Producto>> getAll() {
         List<EntityModel<Producto>> productos = StreamSupport.stream(productoService.getAll().spliterator(), false)
             .map(productoModelAssembler::toModel)

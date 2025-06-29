@@ -1,6 +1,7 @@
 package com.ecomarquet_vm.ecomarquet_vm.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,7 +30,7 @@ public class ProductoController {
     }
 
     // Obtener todos los productos
-    @PutMapping("/listaproductos")
+    @GetMapping("/listaproductos")
     @Operation( summary = "Obtener todos los productos", description = "Obtiene una lista de todos los productos")
     public Iterable<Producto> getAll() {
         return productoService.getAll();

@@ -19,7 +19,9 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 import com.ecomarquet_vm.ecomarquet_vm.Model.CarritoCompra;
 
 import org.springframework.hateoas.MediaTypes;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
 @RequestMapping("/api/v2/carrito")
@@ -32,7 +34,7 @@ public class CarritoCompraControllerV2 {
     private CarritoCompraModelAssembler carritoCompraModelAssembler;
 
     // Agregar un producto al carrito de compra
-    @GetMapping(produces = MediaTypes.HAL_JSON_VALUE)
+    @PutMapping(value="/agregar",produces = MediaTypes.HAL_JSON_VALUE)
     public CollectionModel<EntityModel<CarritoCompra>> getAgregarProducto(){
         List<EntityModel<CarritoCompra>> carritos = carritoCompraService.findAll().stream()
             .map(carritoCompraModelAssembler::toModel)
@@ -42,7 +44,7 @@ public class CarritoCompraControllerV2 {
     }
 
     // Eliminar un producto del carrito de compra
-    @GetMapping(produces= MediaTypes.HAL_JSON_VALUE)
+    @DeleteMapping(value="/eliminar", produces= MediaTypes.HAL_JSON_VALUE)
     public CollectionModel<EntityModel<CarritoCompra>> getEliminarProducto(){
         List<EntityModel<CarritoCompra>> carritos = carritoCompraService.findAll().stream()
             .map(carritoCompraModelAssembler::toModel)
@@ -53,7 +55,7 @@ public class CarritoCompraControllerV2 {
 
     // Calcular el total del carrito de compra
     // BigDecimal para manejar precios
-    @GetMapping(produces = MediaTypes.HAL_JSON_VALUE)
+    @GetMapping(value="/total",produces = MediaTypes.HAL_JSON_VALUE)
     public CollectionModel<EntityModel<CarritoCompra>> getCalcularTotal(){
         List<EntityModel<CarritoCompra>> carritos = carritoCompraService.findAll().stream()
             .map(carritoCompraModelAssembler::toModel)
