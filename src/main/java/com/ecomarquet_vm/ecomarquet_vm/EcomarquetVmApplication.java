@@ -9,5 +9,4 @@ public class EcomarquetVmApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(EcomarquetVmApplication.class, args);
 	}
-
 }
