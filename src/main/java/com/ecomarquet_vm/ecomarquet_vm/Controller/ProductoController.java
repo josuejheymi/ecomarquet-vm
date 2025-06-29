@@ -14,7 +14,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
-@RequestMapping("/api/productos")
+@RequestMapping("/api/v1/productos")
 @Tag( name = "Productos", description = "Operaciones relacionadas con los productos")
 public class ProductoController {
 
@@ -27,4 +27,13 @@ public class ProductoController {
     public Producto actualizarStock(@PathVariable String id, @RequestParam Integer stock) {
         return productoService.actualizarStock(id, stock);
     }
+
+    // Obtener todos los productos
+    @PutMapping("/listaproductos")
+    @Operation( summary = "Obtener todos los productos", description = "Obtiene una lista de todos los productos")
+    public Iterable<Producto> getAll() {
+        return productoService.getAll();
+    }
+
+
 }
