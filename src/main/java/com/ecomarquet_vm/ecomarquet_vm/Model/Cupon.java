@@ -28,4 +28,33 @@ public class Cupon {
     @ManyToOne
     @JoinColumn(name = "transaccion_id", nullable = false)
     private Transaccion transaccion;
+
+    // getter and setter
+    public String getId() {
+        return id;
+    }
+    public void setId(String id) {
+        this.id = id;
+    }
+    public String getCodigo() {
+        return codigo;
+    }
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+    public BigDecimal getDescuento() {
+        return descuento;
+    }
+    public void setDescuento(BigDecimal descuento) {
+        this.descuento = descuento;
+    }
+    public Date getValidoHasta() {
+        return validoHasta;
+    }
+    public void setValidoHasta(Date validoHasta) {
+        this.validoHasta = validoHasta;
+    }
+    public Transaccion getTransaccion() {
+        return transaccion;
+    }
 }

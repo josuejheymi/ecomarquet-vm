@@ -37,4 +37,14 @@ public class Producto {
     
     @ManyToMany(mappedBy = "productos")
     private List<CarritoCompra> carritos;
+
+    // get
+    public BigDecimal getPrecio() {
+        return this.precio;
+    }
+    // set
+    public void setPrecio(BigDecimal precio) {
+        this.precio = precio;
+    }
+    
 }

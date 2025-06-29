@@ -31,4 +31,14 @@ public class CarritoCompra {
         inverseJoinColumns = @JoinColumn(name = "producto_id")
     )
     private List<Producto> productos = new ArrayList<>();
+
+    // get
+    public List<Producto> getProductos() {
+        return productos;
+    }
+
+    // set
+    public void setProductos(List<Producto> productos) {
+        this.productos = productos;
+    }
 }
