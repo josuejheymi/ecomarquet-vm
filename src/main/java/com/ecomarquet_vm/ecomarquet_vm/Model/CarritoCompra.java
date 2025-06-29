@@ -32,13 +32,45 @@ public class CarritoCompra {
     )
     private List<Producto> productos = new ArrayList<>();
 
-    // get
+    // getters and setters
+    public String getId() {
+        return id;
+    }
+    public void setId(String id) {
+        this.id = id;
+    }
+    public BigDecimal getTotal() {
+        return total;
+    }
+    public void setTotal(BigDecimal total) {
+        this.total = total;
+    }
+    public Usuario getUsuario() {
+        return usuario;
+    }
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
     public List<Producto> getProductos() {
         return productos;
     }
-
-    // set
     public void setProductos(List<Producto> productos) {
         this.productos = productos;
+    }
+    public void agregarProducto(Producto producto) {
+        this.productos.add(producto);
+        this.total = this.total.add(producto.getPrecio());
+    }
+    public void eliminarProducto(Producto producto) {
+        if (this.productos.remove(producto)) {
+            this.total = this.total.subtract(producto.getPrecio());
+        }
+    }
+    public BigDecimal calcularTotal() {
+        BigDecimal total = BigDecimal.ZERO;
+        for (Producto producto : productos) {
+            total = total.add(producto.getPrecio());
+        }
+        return total;
     }
 }
