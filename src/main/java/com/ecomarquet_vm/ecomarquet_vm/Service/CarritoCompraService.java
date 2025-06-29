@@ -1,5 +1,6 @@
 package com.ecomarquet_vm.ecomarquet_vm.Service;
 import java.math.BigDecimal;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,7 +43,12 @@ public class CarritoCompraService {
     return carrito.getProductos().stream()
             .map(Producto::getPrecio) // devuelve BigDecimal
             .reduce(BigDecimal.ZERO, BigDecimal::add);
-}
+    }
+
+    // Método para obtener todos los carritos de compra
+    public List<CarritoCompra> findAll() {
+        return carritoCompraRepository.findAll();
+    }
 
 }
 

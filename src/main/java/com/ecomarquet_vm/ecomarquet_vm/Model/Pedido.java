@@ -38,4 +38,42 @@ public class Pedido {
     @OneToOne
     @JoinColumn(name = "transaccion_id", nullable = false)
     private Transaccion transaccion;
+
+    // Getters y Setters
+    public String getId() {
+        return id;
+    }
+    public void setId(String id) {
+        this.id = id;
+    }
+    public Date getFechaPedido() {
+        return fechaPedido;
+    }
+    public void setFechaPedido(Date fechaPedido) {
+        this.fechaPedido = fechaPedido;
+    }
+    public String getEstado() {
+        return estado;
+    }
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+    public String getDireccionEnvio() {
+        return direccionEnvio;
+    }
+    public void setDireccionEnvio(String direccionEnvio) {
+        this.direccionEnvio = direccionEnvio;
+    }
+    public Usuario getUsuario() {
+        return usuario;
+    }
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+    public Transaccion getTransaccion() {
+        return transaccion;
+    }
+    public void setTransaccion(Transaccion transaccion) {
+        this.transaccion = transaccion;
+    }
 }

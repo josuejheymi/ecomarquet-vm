@@ -11,7 +11,7 @@ import com.ecomarquet_vm.ecomarquet_vm.Model.*;
 import com.ecomarquet_vm.ecomarquet_vm.Repository.*;
 import net.datafaker.Faker;
 
-@Profile("dev")
+@Profile("test")
 @Component
 public class DataLoader implements CommandLineRunner {
 
