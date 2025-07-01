@@ -17,7 +17,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
-@RequestMapping("/api/carrito")
+@RequestMapping("/api/v1/carrito")
 @Tag( name = "Carrito Compras", description = "Operaciones relacionadas con el carrito de compras")
 public class CarritoController {
 

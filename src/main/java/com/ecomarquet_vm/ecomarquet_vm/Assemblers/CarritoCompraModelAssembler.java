@@ -15,11 +15,15 @@ public class CarritoCompraModelAssembler implements RepresentationModelAssembler
 
     @Override
     public EntityModel<CarritoCompra> toModel(CarritoCompra carritoCompra) {
+        String carritoId = carritoCompra.getId();
+        String productoId = carritoCompra.getProductos().isEmpty() ? "0" : carritoCompra.getProductos().get(0).getId();
         return EntityModel.of(
             carritoCompra,
-            linkTo(methodOn(CarritoCompraControllerV2.class).getAgregarProducto()).withRel("agregarProducto"),
-            linkTo(methodOn(CarritoCompraControllerV2.class).getEliminarProducto()).withRel("eliminarProducto"),
-            linkTo(methodOn(CarritoCompraControllerV2.class).getCalcularTotal()).withRel("calcularTotal")
+            linkTo(methodOn(CarritoCompraControllerV2.class).getAgregarProducto(carritoId, productoId)).withRel("agregarProducto"),
+            linkTo(methodOn(CarritoCompraControllerV2.class).getEliminarProducto(carritoId, productoId)).withRel("eliminarProducto"),
+            linkTo(methodOn(CarritoCompraControllerV2.class).getCalcularTotal(carritoId)).withRel("calcularTotal")
         );
     }
 }
+
+//linkTo(methodOn(ProductoControllerV2.class).actualizarStock(producto.getId(), producto.getStock())).withRel("actualizarStock")
