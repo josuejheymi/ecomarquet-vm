@@ -49,6 +49,11 @@ public class CarritoCompraService {
     public List<CarritoCompra> findAll() {
         return carritoCompraRepository.findAll();
     }
+    // Método para encontrar un carrito de compra por su ID
+    public CarritoCompra findById(String carritoId) {
+    return carritoCompraRepository.findById(carritoId)
+           .orElseThrow(() -> new RuntimeException("Carrito no encontrado"));
+}
 
 }
 

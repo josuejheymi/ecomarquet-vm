@@ -59,29 +59,26 @@ public class DataLoader implements CommandLineRunner {
     }
     //Metodo crear usuarios
     private List<Usuario> crearUsuarios(int cantidad) {
-        List<Usuario> usuarios = new ArrayList<>();
-        for (int i = 0; i < cantidad; i++) {
-            Usuario usuario = new Usuario();
-            usuario.setId("U" + (i + 1));
-            usuario.setNombre(faker.name().username());
-            usuario.setEmail(faker.internet().emailAddress());
-            usuario.setContraseña(faker.internet().password());
-            usuario.setRol(faker.options().option(roles));
-            usuario.setFechaCreacion(faker.date().past(365, TimeUnit.DAYS));
-            usuario.setActivo(faker.bool().bool() ? "ACTIVO" : "INACTIVO");
-
-            CarritoCompra carrito = new CarritoCompra();
-            carrito.setId("C" + (i + 1));
-            carrito.setTotal(BigDecimal.ZERO);
-            carrito.setUsuario(usuario);
-
-            usuario.setCarrito(carrito);
-            usuarioRepository.save(usuario);
-            carritoRepository.save(carrito);
-            usuarios.add(usuario);
-        }
-        return usuarios;
+    List<Usuario> usuarios = new ArrayList<>();
+    Set<String> nombresUsados = new HashSet<>();
+    
+    for (int i = 0; i < cantidad; i++) {
+        Usuario usuario = new Usuario();
+        usuario.setId("U" + (i + 1));
+        
+        // Generar nombre de usuario único
+        String username;
+        do {
+            username = faker.name().username();
+            username = username.length() > 50 ? username.substring(0, 50) : username;
+        } while (nombresUsados.contains(username));
+        
+        nombresUsados.add(username);
+        usuario.setNombre(username);
+        // ... resto del código
     }
+    return usuarios;
+}
     // Metodo asignar productos al carrito
     private void asignarProductosACarritos(List<Usuario> usuarios, List<Producto> productos) {
         usuarios.forEach(usuario -> {

@@ -67,8 +67,4 @@ public class ProductoControllerV2 {
         return CollectionModel.of(productos,
             linkTo(methodOn(ProductoControllerV2.class).getAll()).withSelfRel());
     }
-    
-
-    
-
 }
