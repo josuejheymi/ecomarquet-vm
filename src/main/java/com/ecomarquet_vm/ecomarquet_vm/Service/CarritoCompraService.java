@@ -1,4 +1,7 @@
 package com.ecomarquet_vm.ecomarquet_vm.Service;
+import java.math.BigDecimal;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ecomarquet_vm.ecomarquet_vm.Model.CarritoCompra;
@@ -32,13 +35,26 @@ public class CarritoCompraService {
         return carritoCompraRepository.save(carrito);
     }
 
-    // Calcular el total del carrito de compra
-    public double calcularTotal(String carritoId) {
-        CarritoCompra carrito = carritoCompraRepository.findById(carritoId).orElse(null);
-        return carrito.getProductos().stream()
-                .mapToDouble(Producto::getPrecio)
-                .sum();
+    // Calcular el total del carrito de compra - Pequeña mejora: se usa BigDecimal para manejar precios
+    public BigDecimal calcularTotal(String carritoId) {
+    CarritoCompra carrito = carritoCompraRepository.findById(carritoId)
+        .orElseThrow(() -> new RuntimeException("Carrito no encontrado"));
+
+    return carrito.getProductos().stream()
+            .map(Producto::getPrecio) // devuelve BigDecimal
+            .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
+
+    // Método para obtener todos los carritos de compra
+    public List<CarritoCompra> findAll() {
+        return carritoCompraRepository.findAll();
+    }
+    // Método para encontrar un carrito de compra por su ID
+    public CarritoCompra findById(String carritoId) {
+    return carritoCompraRepository.findById(carritoId)
+           .orElseThrow(() -> new RuntimeException("Carrito no encontrado"));
+}
+
 }
 
 // @Autowired inyecta las dependencias de los repositorios

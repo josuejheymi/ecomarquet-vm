@@ -25,4 +25,7 @@ public class ReporteService {
     public void delete(String id) {
         reporteRepository.deleteById(id);
     }
+     public boolean existsById(String id) {
+        return reporteRepository.existsById(id);
+    }
 }

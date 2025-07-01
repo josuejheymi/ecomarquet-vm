@@ -1,5 +1,7 @@
 package com.ecomarquet_vm.ecomarquet_vm.Controller;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,8 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ecomarquet_vm.ecomarquet_vm.Model.Producto;
 import com.ecomarquet_vm.ecomarquet_vm.Service.ProductoService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
-@RequestMapping("/api/productos")
+@RequestMapping("/api/v1/productos")
+@Tag( name = "Productos", description = "Operaciones relacionadas con los productos")
 public class ProductoController {
 
     @Autowired
@@ -18,7 +24,17 @@ public class ProductoController {
 
     // Actualizar stock de un producto
     @PutMapping("/{id}/stock")
+    @Operation( summary = "Actualizar stock", description = "Actualiza el stock de productos")
     public Producto actualizarStock(@PathVariable String id, @RequestParam Integer stock) {
         return productoService.actualizarStock(id, stock);
     }
+
+    // Obtener todos los productos
+    @GetMapping("/listaproductos")
+    @Operation( summary = "Obtener todos los productos", description = "Obtiene una lista de todos los productos")
+    public Iterable<Producto> getAll() {
+        return productoService.getAll();
+    }
+
+
 }

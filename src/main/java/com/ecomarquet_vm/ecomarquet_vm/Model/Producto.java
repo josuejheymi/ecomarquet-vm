@@ -1,76 +1,97 @@
 package com.ecomarquet_vm.ecomarquet_vm.Model;
-import java.util.ArrayList;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
-@Table(name = "Producto")
+@Table(name = "producto")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
+@JsonIdentityInfo(
+    generator = ObjectIdGenerators.PropertyGenerator.class,
+    property = "id"
+)
 public class Producto {
-    // id
     @Id
-    @Column(name = "producto_id", length = 20)
-    private String producto_id;
-
-    // Nombre
-    @Column(name = "nombre", nullable = false, length = 100)
+    @Column(name = "producto_id")
+    private String id;
+    
+    @Column(nullable = false, length = 100)
     private String nombre;
-
-    // Descripcion
-    @Column(name = "descripcion", nullable = false, length = 100)
+    
+    @Column(nullable = false, length = 100)
     private String descripcion;
-
-    // Precio
-    @Column(name = "precio", nullable = false, precision = 10) 
-    private Double precio;
-
-    // Stock
-    @Column(name = "stock", nullable = false, precision = 10) 
+    
+    @Column(nullable = false, precision = 10, scale = 2)
+    private BigDecimal precio;
+    
+    @Column(nullable = false)
     private Integer stock;
-
-    // Categoria
-    @Column(name = "categoria", nullable = false, length = 100)
+    
+    @Column(nullable = false, length = 100)
     private String categoria;
-
-    // Fecha creacion
-    @Column(name = "Fecha_Creacion", nullable = false, length = 100)
+    
+    @Column(nullable = false, name = "fecha_creacion")
     private Date fechaCreacion;
-
-    // Relacion con CarritoCompra
+    
     @ManyToMany(mappedBy = "productos")
-    private List<CarritoCompra> carritoCompras = new ArrayList<>();
+    private List<CarritoCompra> carritos;
 
-    // Getter
-    public Double getPrecio() {
+    // Getters y Setters
+    public String getId() {
+        return id;
+    }
+    public void setId(String id) {
+        this.id = id;
+    }
+    public String getNombre() {
+        return nombre;
+    }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    public String getDescripcion() {
+        return descripcion;
+    }
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+    public BigDecimal getPrecio() {
         return precio;
     }
-
-    public String getProducto_id(){
-        return producto_id;
+    public void setPrecio(BigDecimal precio) {
+        this.precio = precio;
     }
-
     public Integer getStock() {
         return stock;
     }
-
-    // Setter
     public void setStock(Integer stock) {
         this.stock = stock;
     }
-
-
-
+    public String getCategoria() {
+        return categoria;
+    }
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }
+    public Date getFechaCreacion() {
+        return fechaCreacion;
+    }
+    public void setFechaCreacion(Date fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
+    public List<CarritoCompra> getCarritos() {
+        return carritos;
+    }
+    public void setCarritos(List<CarritoCompra> carritos) {
+        this.carritos = carritos;
+    }
 }
