@@ -30,7 +30,10 @@ public class UsuarioController {
     private UsuarioModelAssembler usuarioModelAssembler;
 
     @GetMapping
-    @Operation(summary="Lista de los usuarios", description="Muestra la lista de todos los usuarios en el sistema")    
+    @Operation(
+        summary="Listar todos los usuarios", 
+        description="Obtiene la lista completa de usuarios registrados en el sistema"
+    )    
     public CollectionModel<EntityModel<Usuario>> getAll() {
         List<EntityModel<Usuario>> usuarios = usuarioService.findAll().stream()
             .map(usuarioModelAssembler::toModel)
@@ -43,7 +46,10 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
-    @Operation(summary="Busca el usuario mediante su ID", description="Busca usuario en la base de datos mediante su ID")
+    @Operation(
+        summary="Buscar usuario por ID", 
+        description="Busca un usuario específico en la base de datos usando su ID"
+    )
     public ResponseEntity<EntityModel<Usuario>> getUsuario(@PathVariable String id) {
         return usuarioService.findById(id)
             .map(usuarioModelAssembler::toModel)
@@ -52,7 +58,10 @@ public class UsuarioController {
     }
 
     @PostMapping    
-    @Operation(summary="Crea nuevo usuario", description="Crea un nuevo usuario en la base de datos")
+    @Operation(
+        summary="Crear nuevo usuario", 
+        description="Agrega un nuevo usuario a la base de datos con la información proporcionada"
+    )
     public ResponseEntity<EntityModel<Usuario>> create(@RequestBody Usuario usuario) {
         Usuario nuevoUsuario = usuarioService.save(usuario);
         EntityModel<Usuario> usuarioModel = usuarioModelAssembler.toModel(nuevoUsuario);
@@ -63,7 +72,10 @@ public class UsuarioController {
     }
 
     @PutMapping("/{id}")
-    @Operation(summary="Actualiza usuario", description="Actualiza al usuario mediante su ID en la base de datos")
+    @Operation(
+        summary="Actualizar usuario", 
+        description="Actualiza los datos de un usuario existente identificado por su ID"
+    )
     public ResponseEntity<EntityModel<Usuario>> update(@PathVariable String id, @RequestBody Usuario usuario) {
         usuario.setId(id);
         Usuario usuarioActualizado = usuarioService.save(usuario);
@@ -73,7 +85,10 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/{id}")
-    @Operation(summary="Elimina usuario", description="Elimina el usuario mediante su ID en la base de datos")
+    @Operation(
+        summary="Eliminar usuario", 
+        description="Elimina un usuario de la base de datos utilizando su ID"
+    )
     public ResponseEntity<Void> delete(@PathVariable String id) {
         if(usuarioService.findById(id).isPresent()) {
             usuarioService.delete(id);

@@ -56,31 +56,31 @@ public class CarritoCompraControllerV2 {
     }
 
     @GetMapping(value = "/{carrito_id}/total", produces = MediaTypes.HAL_JSON_VALUE)
-    @Operation(summary = "Calcular precio total carrito")
-    public EntityModel<Map<String, Object>> calcularTotal(@PathVariable("carrito_id") String carritoId) {
+@Operation(summary = "Calcular precio total carrito")
+public EntityModel<Map<String, Object>> calcularTotal(@PathVariable("carrito_id") String carritoId) {
+    
+    // CAMBIO 1: Se reemplazó el findAll() por un método específico que calcula solo el total del carrito solicitado
+    // - Antes: carritoCompraService.findAll() -> devolvía todos los carritos innecesariamente
+    // - Ahora: Solo calcula el total del carrito con el ID recibido
+    BigDecimal total = carritoCompraService.calcularTotal(carritoId);
+    
+    // CAMBIO 2: Se usa un Map para la respuesta en lugar de la entidad completa
+    // - Ventaja: Proporciona una estructura más limpia y específica
+    Map<String, Object> response = new HashMap<>();
+    response.put("carritoId", carritoId);  // Se añade el ID para contexto
+    response.put("total", total);          // El dato principal solicitado
+    
+    // CAMBIO 3: Generación mejorada de enlaces HATEOAS
+    return EntityModel.of(response,
+        // Enlace self (al propio endpoint)
+        linkTo(methodOn(CarritoCompraControllerV2.class).calcularTotal(carritoId)).withSelfRel(),
         
-        // CAMBIO 1: Se reemplazó el findAll() por un método específico que calcula solo el total del carrito solicitado
-        // - Antes: carritoCompraService.findAll() -> devolvía todos los carritos innecesariamente
-        // - Ahora: Solo calcula el total del carrito con el ID recibido
-        BigDecimal total = carritoCompraService.calcularTotal(carritoId);
-        
-        // CAMBIO 2: Se usa un Map para la respuesta en lugar de la entidad completa
-        // - Ventaja: Proporciona una estructura más limpia y específica
-        Map<String, Object> response = new HashMap<>();
-        response.put("carritoId", carritoId);  // Se añade el ID para contexto
-        response.put("total", total);          // El dato principal solicitado
-        
-        // CAMBIO 3: Generación mejorada de enlaces HATEOAS
-        return EntityModel.of(response,
-            // Enlace self (al propio endpoint)
-            linkTo(methodOn(CarritoCompraControllerV2.class).calcularTotal(carritoId)).withSelfRel(),
-            
-            // Enlaces a acciones relacionadas (mejor descubribilidad de la API)
-            linkTo(methodOn(CarritoCompraControllerV2.class).agregarProducto(carritoId, "P1")).withRel("agregarProducto"),
-            linkTo(methodOn(CarritoCompraControllerV2.class).eliminarProducto(carritoId, "P1")).withRel("eliminarProducto"),
-            linkTo(methodOn(CarritoCompraControllerV2.class).obtenerCarrito(carritoId)).withRel("verCarrito")
-        );
-    }
+        // Enlaces a acciones relacionadas (mejor descubribilidad de la API)
+        linkTo(methodOn(CarritoCompraControllerV2.class).agregarProducto(carritoId, "P1")).withRel("agregarProducto"),
+        linkTo(methodOn(CarritoCompraControllerV2.class).eliminarProducto(carritoId, "P1")).withRel("eliminarProducto"),
+        linkTo(methodOn(CarritoCompraControllerV2.class).obtenerCarrito(carritoId)).withRel("verCarrito")
+    );
+}
 
     @GetMapping(value = "/{carrito_id}", produces = MediaTypes.HAL_JSON_VALUE)
     @Operation(summary = "Obtener carrito por ID")
