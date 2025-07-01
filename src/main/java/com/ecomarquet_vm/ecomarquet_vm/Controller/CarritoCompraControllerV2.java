@@ -32,7 +32,7 @@ public class CarritoCompraControllerV2 {
     private CarritoCompraModelAssembler carritoCompraModelAssembler;
 
     // Agregar un producto al carrito de compra
-    @GetMapping(produces = MediaTypes.HAL_JSON_VALUE)
+    @GetMapping(path = "/listar-agregados",produces = MediaTypes.HAL_JSON_VALUE)
     public CollectionModel<EntityModel<CarritoCompra>> getAgregarProducto(){
         List<EntityModel<CarritoCompra>> carritos = carritoCompraService.findAll().stream()
             .map(carritoCompraModelAssembler::toModel)
@@ -42,7 +42,7 @@ public class CarritoCompraControllerV2 {
     }
 
     // Eliminar un producto del carrito de compra
-    @GetMapping(produces= MediaTypes.HAL_JSON_VALUE)
+    @GetMapping(path = "/listar-eliminados",produces= MediaTypes.HAL_JSON_VALUE)
     public CollectionModel<EntityModel<CarritoCompra>> getEliminarProducto(){
         List<EntityModel<CarritoCompra>> carritos = carritoCompraService.findAll().stream()
             .map(carritoCompraModelAssembler::toModel)
@@ -53,7 +53,7 @@ public class CarritoCompraControllerV2 {
 
     // Calcular el total del carrito de compra
     // BigDecimal para manejar precios
-    @GetMapping(produces = MediaTypes.HAL_JSON_VALUE)
+    @GetMapping(path = "/listar-totales",produces = MediaTypes.HAL_JSON_VALUE)
     public CollectionModel<EntityModel<CarritoCompra>> getCalcularTotal(){
         List<EntityModel<CarritoCompra>> carritos = carritoCompraService.findAll().stream()
             .map(carritoCompraModelAssembler::toModel)
