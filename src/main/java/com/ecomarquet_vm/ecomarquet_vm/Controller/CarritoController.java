@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,7 +26,7 @@ public class CarritoController {
     private CarritoCompraService carritoCompraService;
 
     // agregar productos al carrito de compra
-    @PostMapping("/{carritoId}/agregar/{productoId}")
+    @PutMapping("/{carritoId}/agregar/{productoId}")
     @Operation( summary = "Agregar producto al carrito", description = "Agrega un producto al carrito de compras")
     public CarritoCompra agregarProducto(@PathVariable String carritoId, @PathVariable String productoId) {
         return carritoCompraService.agregarProducto(carritoId, productoId);
