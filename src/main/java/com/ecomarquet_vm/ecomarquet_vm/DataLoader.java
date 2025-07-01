@@ -15,15 +15,13 @@ import net.datafaker.Faker;
 @Component
 public class DataLoader implements CommandLineRunner {
 
-    private final Faker faker = new Faker(new Locale("es")); //librería DataFaker en español para generar datos falsos pero realistas
+    private final Faker faker = new Faker(new Locale("es"));
 
-    // Definición de constantes para roles, estados de pedido, métodos de pago y categorías de productos
     private final String[] roles = {"ADMIN", "USER", "MODERATOR"};
     private final String[] estadosPedido = {"PENDIENTE", "ENVIADO", "ENTREGADO", "CANCELADO"};
     private final String[] metodosPago = {"TARJETA", "PAYPAL", "TRANSFERENCIA"};
     private final String[] categoriasProducto = {"LIMPIEZA", "ALIMENTACIÓN", "HIGIENE", "REUTILIZABLES"};
 
-    // Repositorios para acceder a las entidades
     @Autowired private UsuarioRepository usuarioRepository;
     @Autowired private ProductoRepository productoRepository;
     @Autowired private CarritoCompraRepository carritoRepository;
@@ -33,7 +31,6 @@ public class DataLoader implements CommandLineRunner {
     @Autowired private CuponRepository cuponRepository;
     @Autowired private ReporteRepository reporteRepository;
 
-    // Método que se ejecuta al iniciar la aplicación para cargar datos de prueba
     @Override
     public void run(String... args) throws Exception {
         List<Producto> productos = crearProductos(20);
@@ -41,12 +38,12 @@ public class DataLoader implements CommandLineRunner {
         asignarProductosACarritos(usuarios, productos);
         crearTransaccionesCompletas(usuarios);
     }
-    //Metodo para crear productos
+
     private List<Producto> crearProductos(int cantidad) {
-        List<Producto> productos = new ArrayList<>(); //
+        List<Producto> productos = new ArrayList<>();
         for (int i = 0; i < cantidad; i++) {
             Producto p = new Producto();
-            p.setId("P" + (i + 1)); 
+            p.setId("P" + (i + 1));
             p.setNombre("Eco " + faker.commerce().material());
             p.setDescripcion("Producto ecológico para " + faker.commerce().department());
             p.setPrecio(new BigDecimal(faker.number().randomDouble(2, 1000, 10000)));
@@ -57,29 +54,54 @@ public class DataLoader implements CommandLineRunner {
         }
         return productoRepository.saveAll(productos);
     }
-    //Metodo crear usuarios
     private List<Usuario> crearUsuarios(int cantidad) {
     List<Usuario> usuarios = new ArrayList<>();
     Set<String> nombresUsados = new HashSet<>();
-    
+
+    // Primero crear usuarios sin carritos
     for (int i = 0; i < cantidad; i++) {
         Usuario usuario = new Usuario();
         usuario.setId("U" + (i + 1));
-        
-        // Generar nombre de usuario único
+
         String username;
         do {
             username = faker.name().username();
             username = username.length() > 50 ? username.substring(0, 50) : username;
         } while (nombresUsados.contains(username));
-        
+
         nombresUsados.add(username);
         usuario.setNombre(username);
-        // ... resto del código
+        usuario.setEmail(username + "@ejemplo.com");
+        usuario.setContraseña("123456");
+        usuario.setRol(faker.options().option(roles));
+        usuario.setActivo("true"); // Usar String "true" en lugar de boolean true
+        usuario.setFechaCreacion(new Date());
+        
+        usuarios.add(usuario);
     }
-    return usuarios;
+
+    // Guardar usuarios primero
+    List<Usuario> usuariosGuardados = usuarioRepository.saveAll(usuarios);
+
+    // Luego crear y guardar carritos
+    List<CarritoCompra> carritos = new ArrayList<>();
+    for (Usuario usuario : usuariosGuardados) {
+        CarritoCompra carrito = new CarritoCompra();
+        carrito.setId("C" + usuario.getId());
+        carrito.setProductos(new ArrayList<>());
+        carrito.setTotal(BigDecimal.ZERO);
+        carrito.setUsuario(usuario);
+        
+        carritos.add(carrito);
+        usuario.setCarrito(carrito);
+    }
+
+    // Guardar carritos
+    carritoRepository.saveAll(carritos);
+    
+    return usuarioRepository.saveAll(usuariosGuardados);
 }
-    // Metodo asignar productos al carrito
+
     private void asignarProductosACarritos(List<Usuario> usuarios, List<Producto> productos) {
         usuarios.forEach(usuario -> {
             CarritoCompra carrito = usuario.getCarrito();
@@ -98,7 +120,7 @@ public class DataLoader implements CommandLineRunner {
             carritoRepository.save(carrito);
         });
     }
-    //Metodo crear transacciones completas
+
     private void crearTransaccionesCompletas(List<Usuario> usuarios) {
         usuarios.forEach(usuario -> {
             if (usuario.getCarrito() == null) {

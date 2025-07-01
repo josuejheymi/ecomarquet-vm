@@ -106,3 +106,4 @@ public class ReporteServiceTest {
         verify(reporteRepository).deleteById("rep001");
     }
 }
+//TEST -REPORTE LISTO

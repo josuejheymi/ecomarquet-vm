@@ -83,7 +83,6 @@ public class UsuarioController {
 
         return ResponseEntity.ok(usuarioModel);
     }
-
     @DeleteMapping("/{id}")
     @Operation(
         summary="Eliminar usuario", 

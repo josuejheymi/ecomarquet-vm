@@ -105,3 +105,4 @@ public class UsuarioServiceTest {
         verify(usuarioRepository, times(1)).deleteById("u123");
     }
 }
+//TEST - usuario -listo

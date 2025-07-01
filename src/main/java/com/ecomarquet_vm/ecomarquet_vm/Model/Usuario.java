@@ -14,6 +14,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+//Entrega mejor en formato JSOn
 @JsonIdentityInfo(
     generator = ObjectIdGenerators.PropertyGenerator.class,
     property = "id"

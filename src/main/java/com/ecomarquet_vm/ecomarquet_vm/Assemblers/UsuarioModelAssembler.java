@@ -11,9 +11,11 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 @Component
 public class UsuarioModelAssembler implements RepresentationModelAssembler<Usuario, EntityModel<Usuario>> {
-    
+
+
     @Override
     public EntityModel<Usuario> toModel(Usuario usuario) {
+
         return EntityModel.of(
             usuario,
             linkTo(methodOn(UsuarioController.class).getUsuario(usuario.getId())).withSelfRel(),
@@ -21,3 +23,4 @@ public class UsuarioModelAssembler implements RepresentationModelAssembler<Usuar
         );
     }
 }
+//assemblers para la insersion de los links HATEOS

@@ -43,7 +43,6 @@ public class ReporteController {
             return ResponseEntity.internalServerError().body("Error interno"); // 500
         }
     }
-
    @GetMapping("/{id}")
     @Operation(summary = "Busca reporte por ID")
     public ResponseEntity<?> getById(@PathVariable String id) {
@@ -53,7 +52,6 @@ public class ReporteController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("No se encontró ningún reporte con ID: " + id); // 404
             }
-            
             // Respuesta exitosa con mensaje personalizado
             Map<String, Object> response = new HashMap<>();
             response.put("mensaje", "Reporte obtenido exitosamente");

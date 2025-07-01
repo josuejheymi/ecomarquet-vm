@@ -19,3 +19,4 @@ public class ReporteModelAssembler implements RepresentationModelAssembler<Repor
         );
     }
 }
+//assemblers para la insersion de los links HATEOS

@@ -26,6 +26,6 @@ public class ReporteService {
         reporteRepository.deleteById(id);
     }
      public boolean existsById(String id) {
-        return reporteRepository.existsById(id); // Añade este método
+        return reporteRepository.existsById(id);
     }
 }
